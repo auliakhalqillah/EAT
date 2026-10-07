@@ -84,14 +84,14 @@ if uploaded_file is not None:
             
             pga_results.append({
                 'Component': comp,
-                'PGA (g)': round(abs(pga_val), 6),
-                'Time PGA (s)': round(t_pga, 4),
+                'Amplitude': round(abs(pga_val), 6),
+                'Time (s)': round(t_pga, 4),
                 'Actual Value (g)': round(pga_val, 6)
             })
 
         st.write("### Peak Ground Acceleration (PGA)")
         df_pga = pd.DataFrame(pga_results)
-        st.table(df_pga[['Component', 'PGA (g)', 'Time PGA (s)']])
+        st.table(df_pga[['Component', 'Amplitude', 'Time (s)']])
 
         # ==========================================
         # PLOT GROUND MOTION
@@ -107,7 +107,7 @@ if uploaded_file is not None:
                 fig_gm.add_trace(go.Scatter(x=df['Time'], y=df[comp], mode='lines', name=comp, line=dict(color=color)), row=i+1, col=1)
                 
                 idx_pga = komponen_list.index(comp)
-                t_pga = pga_results[idx_pga]['Time PGA (s)']
+                t_pga = pga_results[idx_pga]['Time (s)']
                 pga_val_asli = pga_results[idx_pga]['Actual Value (g)']
                 
                 fig_gm.add_vline(x=t_pga, line_width=2, line_dash="dash", line_color="black", row=i+1, col=1)
@@ -220,7 +220,7 @@ if uploaded_file is not None:
                         color = warna_dict[comp]
                         idx_pga = komponen_list.index(comp)
                         
-                        t_pga = pga_results[idx_pga]['Time PGA (s)']
+                        t_pga = pga_results[idx_pga]['Time (s)']
                         pga_val = pga_results[idx_pga]['Actual Value (g)']
                         axes[i, 0].plot(df['Time'], df[comp], color=color)
                         axes[i, 0].axvline(x=t_pga, color='red', linestyle='--', linewidth=2)
