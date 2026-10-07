@@ -240,7 +240,7 @@ if uploaded_file is not None:
                         axes[i, 1].set_xscale('log')
                         axes[i, 1].set_ylabel('Amplitudo')
                         axes[i, 1].grid(True, which="both", linestyle='--', alpha=0.6)
-                        axes[i, 1].legend(True)
+                        axes[i, 1].legend()
                         if i == num_visible - 1: axes[i, 1].set_xlabel('Frequency (Hz)')
                         if i == 0: axes[i, 1].set_title("Spectrum")
 
