@@ -66,7 +66,7 @@ def home_page():
 # Deklarasi Halaman Navigasi
 home = st.Page(home_page, title="Halaman Utama", icon="🏠", default=True)
 gma_page = st.Page("gma_app.py", title="Ground Motion Analysis Tool (GMAT)", icon="📈")
-mca_page = st.Page("mca_app.py", title="Motion Capture Analysis Tool (MCA)", icon="\U0001F4F7")
+mca_page = st.Page("mca_app.py", title="Motion Capture Analysis Tool (MCAT)", icon="\U0001F4F7")
 
 # ==========================================
 # SETUP NAVIGASI STREAMLIT
