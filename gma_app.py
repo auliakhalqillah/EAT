@@ -113,7 +113,7 @@ if uploaded_file is not None:
                 fig_gm.add_vline(x=t_pga, line_width=2, line_dash="dash", line_color="black", row=i+1, col=1)
                 fig_gm.add_annotation(
                     x=t_pga, y=pga_val_asli,
-                    text=f"PGA: {abs(pga_val_asli):.4f} {unit_opt}",
+                    text=f"Peak: {abs(pga_val_asli):.4f} {unit_opt}",
                     showarrow=True, arrowhead=2, ax=40, ay=-30,
                     font=dict(size=12, color="black"),
                     row=i+1, col=1
