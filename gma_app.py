@@ -19,6 +19,12 @@ uploaded_file = st.sidebar.file_uploader("Upload the Ground Motion Data (Excel/C
 st.sidebar.caption("Column 1 = time series, Column 2 = x-component (E-W), Column 3 = y-component (N-S), Column 4 = z-component (Z)")
 
 st.sidebar.markdown("---")
+st.sidebar.header("2. Configuration")
+unit_opt = st.sidebar.selectbox(
+    'Choose the amplitude unit:', ('g', 'm/s^2', 'gal', 'cm/s^2', 'mm', 'cm')
+)
+
+st.sidebar.markdown("---")
 st.sidebar.header("2. Analysis Option")
 apply_fft = st.sidebar.button("Apply FFT")
 
@@ -93,7 +99,7 @@ if uploaded_file is not None:
         num_visible = len(visible_comps)
         
         if num_visible > 0:
-            gm_titles = [f"{comp} (g)" for comp in visible_comps]
+            gm_titles = [f"{comp} ({unit_opt})" for comp in visible_comps]
             fig_gm = make_subplots(rows=num_visible, cols=1, shared_xaxes=True, vertical_spacing=0.05, subplot_titles=gm_titles)
 
             for i, comp in enumerate(visible_comps):
@@ -107,7 +113,7 @@ if uploaded_file is not None:
                 fig_gm.add_vline(x=t_pga, line_width=2, line_dash="dash", line_color="black", row=i+1, col=1)
                 fig_gm.add_annotation(
                     x=t_pga, y=pga_val_asli,
-                    text=f"PGA: {abs(pga_val_asli):.4f} g",
+                    text=f"PGA: {abs(pga_val_asli):.4f} {unit_opt}",
                     showarrow=True, arrowhead=2, ax=40, ay=-30,
                     font=dict(size=12, color="black"),
                     row=i+1, col=1
@@ -221,7 +227,7 @@ if uploaded_file is not None:
                         axes[i, 0].annotate(f'PGA: {abs(pga_val):.4f} g', xy=(t_pga, pga_val), 
                                             xytext=(t_pga + (df['Time'].max()*0.05), pga_val),
                                             arrowprops=dict(facecolor='red', shrink=0.05, width=1, headwidth=5))
-                        axes[i, 0].set_ylabel(f'Amp {comp} (g)')
+                        axes[i, 0].set_ylabel(f'Amp {comp} ({unit_opt})')
                         axes[i, 0].grid(True, linestyle='--', alpha=0.6)
                         if i == num_visible - 1: axes[i, 0].set_xlabel('Time (s)')
                         if i == 0: axes[i, 0].set_title("Ground Motion")
