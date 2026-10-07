@@ -89,7 +89,7 @@ if uploaded_file is not None:
                 'Actual Value (g)': round(pga_val, 6)
             })
 
-        st.write("### Peak Ground Acceleration (PGA)")
+        st.write("### Data Overview")
         df_pga = pd.DataFrame(pga_results)
         st.table(df_pga[['Component', 'Amplitude', 'Time (s)']])
 
@@ -227,7 +227,7 @@ if uploaded_file is not None:
                         pga_val = pga_results[idx_pga]['Actual Value (g)']
                         axes[i, 0].plot(df['Time'], df[comp], color=color)
                         axes[i, 0].axvline(x=t_pga, color='red', linestyle='--', linewidth=2)
-                        axes[i, 0].annotate(f'PGA: {abs(pga_val):.4f} g', xy=(t_pga, pga_val), 
+                        axes[i, 0].annotate(f'Peak: {abs(pga_val):.4f} {unit_opt}', xy=(t_pga, pga_val), 
                                             xytext=(t_pga + (df['Time'].max()*0.05), pga_val),
                                             arrowprops=dict(facecolor='red', shrink=0.05, width=1, headwidth=5))
                         axes[i, 0].set_ylabel(f'Amp {comp} ({unit_opt})')
@@ -236,10 +236,11 @@ if uploaded_file is not None:
                         if i == 0: axes[i, 0].set_title("Ground Motion")
 
                         valid_idx = freq_pos > 0
-                        axes[i, 1].plot(freq_pos[valid_idx], fft_plot_data[comp][valid_idx], color=color)
+                        axes[i, 1].plot(freq_pos[valid_idx], fft_plot_data[comp][valid_idx], color=color, label=f"Dom Freq={dom_freq} Hz")
                         axes[i, 1].set_xscale('log')
                         axes[i, 1].set_ylabel('Amplitudo')
                         axes[i, 1].grid(True, which="both", linestyle='--', alpha=0.6)
+                        axes[i, 1].legend(True)
                         if i == num_visible - 1: axes[i, 1].set_xlabel('Frequency (Hz)')
                         if i == 0: axes[i, 1].set_title("Spectrum")
 
