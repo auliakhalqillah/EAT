@@ -236,7 +236,7 @@ if uploaded_file is not None:
                         if i == 0: axes[i, 0].set_title("Ground Motion")
 
                         valid_idx = freq_pos > 0
-                        axes[i, 1].plot(freq_pos[valid_idx], fft_plot_data[comp][valid_idx], color=color, label=f"Dom Freq={dom_freq} Hz")
+                        axes[i, 1].plot(freq_pos[valid_idx], fft_plot_data[comp][valid_idx], color=color, label=f"Dom Freq={dom_freq:.2f} Hz")
                         axes[i, 1].set_xscale('log')
                         axes[i, 1].set_ylabel('Amplitudo')
                         axes[i, 1].grid(True, which="both", linestyle='--', alpha=0.6)
