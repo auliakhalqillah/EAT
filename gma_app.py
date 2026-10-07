@@ -145,9 +145,12 @@ if uploaded_file is not None:
             fft_plot_data = {}
 
             for comp in komponen_list:
+                df[comp] = df[comp] - np.mean(df[comp])
                 fft_vals = np.fft.fft(df[comp].values)
                 amp = (2.0 / n) * np.abs(fft_vals[:half_n])
                 fft_plot_data[comp] = amp
+
+                print("max:", max(fft_plot_data[comp]))
 
                 max_amp_idx = np.argmax(amp)
                 dom_freq = freq_pos[max_amp_idx]
