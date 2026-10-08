@@ -8,6 +8,7 @@ import io
 # Konfigurasi Halaman
 # st.set_page_config(page_title="MoCap Displacement Analysis", layout="wide")
 st.title("MCAT: Motion Capture Analysis Tool")
+st.caption("Conduct the baseline correction to get the proper displacement data from motion capture camera data")
 
 # 1. Import Data & Tampilkan Metadata
 st.header("1. Import Data")
